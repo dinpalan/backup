@@ -78,25 +78,28 @@ def manual():
             print(f"Please copy and save the device running{i} config file into a safe folder")
                           
 
-def main():
+def dikupabackup():
 #write your main function here 
        try:           
             print("Wecome to Network Backup Application\nPress 'ctrl+c' to exit anytime during process");   
             back=input("Please type yes for manual backup or no for Automatic backup(yes/no):")
             backup=back.lower()
             try:
-                if backup == 'no':
-                    automatic()
-                if backup == 'yes':
-                    manual()
+                try:
+                    if backup == 'no':     
+                        automatic()
+                    if backup == 'yes':
+                        manual()
+                 except:
+                    print("Problem occured! Please check the ssh connection to the devices from putty")
             except:
                 print("Please type only yes or no");
-                main();
+                dikupabackup();
                 
                      
        except KeyboardInterrupt:
               print("Exiting because of program interpreted by user"); print("Thanks for using my application");       
               
 if __name__=='__main__':
-       main()   
+       dikupabackup()   
 
