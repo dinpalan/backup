@@ -9,7 +9,16 @@ except:
 try:
     import csv
 except:
-    print("Please run 'pip install csv'")   
+    print("Please run 'pip install csv'")
+try:
+    import pyfiglet
+except:
+    print("Please run 'pip install pyfiglet'")
+
+    
+def dikupabanner():
+    ascii_banner = pyfiglet.figlet_format("DIKUPA NETWORK BACKUP SOLUTION")
+    print(ascii_banner)
 
 def automatic():
         print("You choosen the Automatic backup option")
@@ -79,27 +88,28 @@ def manual():
                           
 
 def dikupabackup():
-#write your main function here 
-       try:           
-            print("Wecome to Network Backup Application\nPress 'ctrl+c' to exit anytime during process");   
-            back=input("Please type yes for manual backup or no for Automatic backup(yes/no):")
-            backup=back.lower()
-            try:
-                try:
-                    if backup == 'no':     
-                        automatic()
-                    if backup == 'yes':
-                        manual()
-                 except:
-                    print("Problem occured! Please check the ssh connection to the devices from putty")
+    try:
+        dikupabanner()
+        print("Wecome to Network Backup Application\nPress 'ctrl+c' to exit anytime during process");   
+        back=input("Please type yes for manual backup or no for Automatic backup(yes/no):")
+        backup=back.lower()                
+        if backup == 'no':                
+            try:          
+                automatic()
             except:
-                print("Please type only yes or no");
-                dikupabackup();
-                
-                     
-       except KeyboardInterrupt:
-              print("Exiting because of program interpreted by user"); print("Thanks for using my application");       
-              
+                    
+                print("Please check the device SSH connectivity")
+        elif backup == 'yes':
+            try:
+                manual()
+            except:
+                print("Please check the device SSH connectivity")
+        else:
+            print("Please type only yes or no");
+            dikupabackup();
+    except KeyboardInterrupt:
+              print("Exiting because of program interpreted by user"); print("Thanks for using my application");
+        
 if __name__=='__main__':
        dikupabackup()   
 
